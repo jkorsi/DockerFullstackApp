@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Assistant';
+    src: url('../fonts/Assistant-Variable.woff2');
+}
+
+/* Color Theme Swatches in HSLA */
+.darkBlue {
+    color: hsla(237, 35, 25, 1);
+}
+
+.orange {
+    color: hsla(32, 43, 45, 1);
+}
+
+.lightOrange {
+    color: hsla(32, 30, 78, 1);
+}
+
+.grey {
+    color: hsla(0, 0, 25, 1);
+}
+
+.darkGrey {
+    color: hsla(0, 0, 14, 1);
+}
+
+
+body {
+    font-family: 'Assistant';
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+button {
+    background-color: rgb(183, 226, 242);
+    color: hsla(237, 35%, 25%, 1);
+    display: inline-block;
+    border: none;
+    min-width: 120px;
+    padding: 8px 32px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.error {
+    background: rgb(255, 255, 255);
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 2px;
+    margin-bottom: 2px;
+}

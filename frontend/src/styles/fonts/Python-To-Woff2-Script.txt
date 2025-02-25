@@ -1,0 +1,7 @@
+$ python3
+>>> from fontTools.ttLib import TTFont
+>>> f = TTFont('path/file.ttf')
+>>> f.flavor='woff2'
+>>> f.save('path/file.woff2')
+
+Source: https://tomhendra.dev/articles/google-fonts-to-woff2
