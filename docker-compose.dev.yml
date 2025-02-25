@@ -1,0 +1,43 @@
+services:
+  #----------------------------------
+  #----------- FRONT END ------------
+  #----------------------------------
+  app:
+    build:
+      context: ./frontend/
+      dockerfile: dev.Dockerfile
+    # volumes:
+    #   - ./frontend/:/usr/src/app
+    container_name: blogs-frontend-dev
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8080/api/
+    depends_on:
+      - server
+
+  #----------------------------------
+  #--------- REVERSE PROXY ----------
+  #----------------------------------
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - server
+
+    #----------------------------------
+    #----------- BACK END -------------
+    #----------------------------------
+
+  server:
+    build:
+      context: ./backend/
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./backend/:/data/server
+    environment:
+      # Use internal docker network port for mongo/redis instead of host port
+      - MONGO_URL=mongodb+srv://juho:<password>@bloglist.rcjhg.mongodb.net/?retryWrites=true&w=majority&appName=bloglist

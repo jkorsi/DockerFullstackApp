@@ -18,4 +18,7 @@ export default defineConfig({
       exclude: [],
     },
   },
+  server: {
+    allowedHosts: ["app"],
+  },
 });
