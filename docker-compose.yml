@@ -1,0 +1,32 @@
+services:
+  #----------------------------------
+  #----------- FRONT END ------------
+  #----------------------------------
+  app:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: blogs-frontend-prod
+
+  #----------------------------------
+  #--------- REVERSE PROXY ----------
+  #----------------------------------
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: blog-reverse-proxy-prod
+    depends_on:
+      - app
+      - server
+
+    #----------------------------------
+    #----------- BACK END -------------
+    #----------------------------------
+  server:
+    build:
+      context: ./backend/ # The context will pick this directory as the "build context", and look for the Dockerfile from this folder
+      dockerfile: Dockerfile
+    container_name: blogs-server-prod
